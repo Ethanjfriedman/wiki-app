@@ -1,0 +1,13 @@
+<div id="content-div">
+  <dl>
+    <dt><%= article.title %></dt>
+    <dd>By <%= article.author %> on <%= article.editDates[0] %>
+    <dd>Category: <%= article.category %></dd>
+    <% if (article.editors.length > 0) { %>
+    <dd>Last edited by <%= article.editors[article.editors.length - 1] %> on
+    <%= article.editDates[article.editDates.length - 1] %>
+    <% } %>
+    <dd><%= article.content %></dd>
+  </dl>
+  <a href="/articles/<%= article._id %>/edit">Edit this article</a>
+</div>

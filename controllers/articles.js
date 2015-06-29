@@ -3,26 +3,61 @@ console.log("Articles controller loading");
 var express = require('express');
 var router = express.Router();
 var Article = require('../models/article.js');
+var User = require('../models/user.js');
+var session = require('express-session');
+var marked = require('marked');
 
-// INDEX --show all todos
-router.get('/', function(req, res) {
-  Article.find({}, function(err, articlesArray) {
+// INDEX --show all articles
+// router.get('/', function(req, res) {
+//
+//   var users = User.find({}, function (err, usersArray) {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       Article.find({}, function(err, articlesArray) {
+//         if (err) {
+//           console.log(err);
+//         } else {
+//           res.render('articles/index', {articles: articlesArray, users: usersArray});
+//         }
+//       });
+//     }
+//   });
+
+router.get('/', function (req, res) {
+  User.find({}, function (err, usersArray) {
     if (err) {
-      console.log(err);
+      console.log("Error pulling up users database", err);
     } else {
-      res.render('articles/index', {articles: articlesArray});
+      Article.find({}, function(err, articlesArray) {
+        if (err) {
+          console.log("Error pulling up articles database", err);
+        } else {
+          res.render('articles/index', {articles: articlesArray, users: usersArray});
+        }
+      });
     }
   });
 });
 
 //NEW --form to make new one
 router.get('/new', function(req, res) {
-  res.render('articles/new');
+  //TEST HERE TO SEE IF SESSION EXISTS AND USER IS AVAILABLE IF SO:
+  User.findById(session.userId, function (err, user) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('articles/new');
+    }
+
+  });
+  //if not redirect to login page
 })
 
 //CREATE --create the new one
-router.post('/new', function(req, rest) {
-  var newArticle = new Article(req.body.article);
+router.post('/new', function(req, res) {
+  var submission =  req.body.article;
+  var newArticle = new Article(submission);
 
   newArticle.save(function(err, article){
     if (err) {
@@ -35,10 +70,22 @@ router.post('/new', function(req, rest) {
 });
 
 //SHOW -- detail view of one article
+router.get('/:id/show', function (req, res) {
+  Article.findById(req.params.id, function(err, article) {
+    if (err) {
+      console.log("dagnabbit", err);
+    } else {
+      res.render('articles/show', {article: article});
+    }
+  })
+});
 
 //DELETE
 
 // EDIT -- form to edit an article
+router.get('/:id/edit', function(req, res) {
+
+});
 
 //UPDATE -- update the article
 

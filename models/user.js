@@ -1,4 +1,4 @@
-console.console.log("models/user.js loading");
+console.log("models/user.js loading");
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
@@ -8,7 +8,9 @@ var userSchema = Schema({
   title: String,
   department: String,
   articlesCreated: [],
-  articlesEdited: []
+  articlesEdited: [],
+  bio: String,
+  password: {type: String, required: true}
 });
 
 var User = mongoose.model("User", userSchema);

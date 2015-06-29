@@ -8,18 +8,20 @@
   <body>
     <div id="header">
       <span id="corp-name" class="header-span">E Corp Internal Wiki</span>
-      <span class="header-span"><a href="#">USERNAME HERE</a></span>
-      <span class="header-span"><a href="#">LOGIN/LOGOUT</a></span>
+      <span class="header-span"><a href="/logout">LOGOUT</a></span>
     </div>
     <div id="main-div">
       <nav>
-        <ul>
-          <li>Article 1</li>
-          <li>Article 1</li>
-          <li>Article 1</li>
-          <li>Article 1</li>
+        <ul id="link-ul" class="nav-ul">
+          <li><a href="/">Home Page</a></li>
+          <li><a href="/articles">All Articles</a></li>
+          <li><a href="/articles/new">New Article</a></li>
+          <li><a href="/users">All Users</a></li>
+        </ul>
+        <ul id="nav-articles-ul" class="nav-ul">
         </ul>
       </nav>
+      <% include head %>
       <%- body %>
     </div>
   </body>

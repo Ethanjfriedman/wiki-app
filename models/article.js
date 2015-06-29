@@ -6,6 +6,7 @@ var Schema = mongoose.Schema;
 var articleSchema = Schema({
   author: {type: String, required: true},
   editDates: [{type: Date}],
+  editors: [],
   title:  {type: String,
           required: true},
   category: {type: String, required: true},

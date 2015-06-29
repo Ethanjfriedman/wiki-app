@@ -1,0 +1,13 @@
+<div id="content-div">
+  <dl>
+    <dt class="users-list-name"><%= user.name %></dt>
+    <dd>Title: <%= user.title %>, <%= user.department %></dd>
+    <% if (user.articlesCreated) { %>
+    <dd><ul>Articles created: <% user.articlesCreated.forEach(function(article, i) { %>
+      <li>article</li>
+      <% }); %>
+    <% } %></dd>
+
+    <dd>About me: <%= user.bio %></dd>
+  </dl>
+</div>

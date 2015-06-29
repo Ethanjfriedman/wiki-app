@@ -1,0 +1,7 @@
+<div id="content-div">
+  <h2>Current Users</h2>
+  <ul id="users-list">
+  <% users.forEach(function(user, i) { %>
+  <li><a href="/users/<%= user._id %>/show"><%= user.name %></a>, <%= user.title %>, <%= user.department %></li>
+  <% }); %>
+</div>

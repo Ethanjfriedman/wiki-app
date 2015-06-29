@@ -1,12 +1,12 @@
 <div id="content-div"
-  <h2>Add New Article</h2>
-  <form id="new-article-form" action="/articles/new" method="POST">
+  <h2>Edit Article</h2>
+  <form id="edit-article-form" action="/articles/edit" method="POST">
     <label for="article-title">Article title: </label>
-    <input type="text" class="article-input" id="article-title" placeholder="Title" name="article[title]" /><br/>
+    <input type="text" class="article-input" id="article-title" value="<%= article.title %>" name="article[title]" /><br/>
     <label for="article-author">Author: </label>
-    <input type="text" class="article-input" placeholder="TEST AUTHOR" name="article[author]" /><br/>
+    <input type="text" class="article-input" value="<%= article.author %>" name="article[author]" /><br/>
     <label for="article-category">Category: </label>
-    <select class="article-input" id="article-category" name="article[category]">
+    <select class="article-input" id="article-category" value="<%= article.category %>"name="article[category]">
       <option value="Procedures">Procedures</option>
       <option value="Processes">Processes</option>
       <option value="Human Resources">Human Resources</option>
@@ -16,9 +16,9 @@
       <option value="New Employee Info">Onboarding / Getting Started</option>
     </select><br/>
     <label for="article-content">Article content: </label>
-    <textarea class="article-input" id="article-content" name="article[content]">
+    <textarea class="article-input" value="<%= article.title %>"id="article-content" name="article[content]">
     </textarea>
-    <input type="hidden" name="article[editDates]" value="<%= new Date() %>"/>
+    <input type="hidden" name="article[editDates][]" value="<%= new Date() %>"/>
     <input type="submit" value="Create article"/>
   </form>
 </div>

@@ -1,0 +1,31 @@
+<div id="content-div"
+  <h2>Add New User</h2>
+  <form id="new-user-form" action="/users/new" method="POST">
+    <label for="user-name">Name: </label>
+    <input type="text" id="user-name" name="user[name]" class="user-input" placeholder="Firstname Lastname" /><br/>
+    <label for="user-title">Title: </label>
+    <input type="text" class="user-input" id="user-title" name="user[title]" placeholder="Title" /><br/>
+    <label for="user-department">Department: </label>
+    <select class="user-input" id="user-department" name="user[department]">
+      <option value="Accounting">Accounting</option>
+      <option value="Administration">Administration</option>
+      <option value="Contracts">Contracts</option>
+      <option value="Editorial">Editorial</option>
+      <option value="Executive">Executive</option>
+      <option value="Human Resources">Human Resources</option>
+      <option value="IT">IT</option>
+      <option value="Legal">Legal</option>
+      <option value="Marketing">Marketing</option>
+      <option value="Office Services">Office Services</option>
+      <option value="Publicity">Publicity</option>
+      <option value="Royalties">Royalties</option>
+      <option value="Sales">Sales</option>
+      <option value="New Employee Info">Onboarding / Getting Started</option>
+    </select><br/>
+    <label for="user-bio">About me: </label>
+    <textarea id="user-bio" class="user-input" name="user[bio]"></textarea><br/>
+    <label for="user-password">Password: </label>
+    <input type="password" id="user-password" class="user-input" name="user[password]" /><br/>
+    <input type="submit" value="Add New User"/>
+  </form>
+</div>

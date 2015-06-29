@@ -16,16 +16,21 @@ body {
   background: lightgray;
   display: inline-flex;
   justify-content: flex-start;
+  background: -webkit-linear-gradient(left top, gray , lightgray);
+  background: -o-linear-gradient(bottom right, gray, lightgray);
+  background: -moz-linear-gradient(bottom right, gray, lightgray);
+  background: linear-gradient(to bottom right, gray, darkgray);
 }
 
 .header-span {
-  color: gray;
+  color: darkgray;
 }
 
 .header-span + .header-span {
   padding-left: 20%;
   align-self: flex-end;
   padding-bottom: 2%;
+  color: lightgray;
 }
 
 .header-span a {
@@ -36,7 +41,7 @@ body {
 
 .header-span a:hover {
   color: white;
-  transform: translateY(-10px);
+  text-shadow: 0 1px gray;
 }
 
 #corp-name {
@@ -49,13 +54,36 @@ body {
 
 nav {
   border: 1px solid gray;
-  width: 25vh;
+  width: 15vw;
   height: 100vh;
   padding: 10px;
+  background: -webkit-linear-gradient(left top, white , lightgray);
+  background: -o-linear-gradient(bottom right, white, lightgray);
+  background: -moz-linear-gradient(bottom right, white, lightgray);
+  background: linear-gradient(to bottom right, white , darkgray);
+}
+
+nav ul, #users-list {
+  list-style-type: none;
 }
 
 nav ul {
-  list-style-type: none;
+  padding-left: 20%;
+}
+
+nav ul li {
+  margin: 5% 0;
+}
+
+nav ul li a {
+  transition: all 0.5s ease;
+  text-decoration: none;
+}
+
+nav ul li a:hover {
+  color: white;
+  font-weight: bold;
+  text-shadow: 1px 1px gray;
 }
 
 #main-div {
@@ -66,4 +94,13 @@ nav ul {
 
 #content-div {
   padding-left: 5%;
+  width: 72vw;
+}
+
+.users-list-name {
+  font-weight: bold;
+}
+
+dd {
+  padding-left: 2em;
 }

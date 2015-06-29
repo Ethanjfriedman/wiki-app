@@ -1,5 +1,12 @@
 <div id="content-div"
   <h2>E-Corp Internal Corporate Wiki</h2>
-  <p>All articles listed by section at left.<p>
-  <p>If any issues, please contact CTO, Ethan Friedman, at ethanjf99@gmail.com</p>
+  <dl id="article-list">
+  <% articles.forEach(function(article, i) { %>
+  <dt class="article-list-title"><a href="/articles/<%= article._id %>/show"><%= article.title %></a></dt>
+  <dd class="article-list-item">
+    <span class="article-list-item-category">Category: <%= article.category %></span>
+    <span class="article-list-item-author">Author: <%= article.author %> on <%= article.editDates[0] %></span>.
+  </dd>
+  <% }); %>
+  </dl>
 </div>
