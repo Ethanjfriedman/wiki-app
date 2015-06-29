@@ -3,6 +3,7 @@ console.log("Users controller loading...");
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user.js');
+var bcrypt = require('bcrypt');
 
 // INDEX --show all users
 router.get('/', function(req, res) {
@@ -22,13 +23,22 @@ router.get('/new', function(req, res) {
 
 //CREATE --create the new one
 router.post('/new', function(req, res) {
-  var newUser = new User(req.body.user);
+  var userEntered = req.body.user;
+  bcrypt.genSalt(10, function(err, salt) {
+    bcrypt.hash(userEntered.password, salt, function (err, hash) {
+      userEntered.password = hash;
+      console.log(hash);
+    })
+  });
+  //VAR userEntered = req.body.user
+  //BCRYPT userEntered.password = HASH (userEntered.password)
+  var newUser = new User(userEntered);
 
   newUser.save(function(err, user){
     if (err) {
       console.log(err);
     } else {
-      console.log(user);
+      console.log("new user:",user);
       Users.find({}, function(err, usersArray) {
         if (err) {
           console.log(err);

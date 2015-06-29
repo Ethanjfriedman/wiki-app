@@ -9,9 +9,9 @@ var express                 = require('express'),
     morgan                  = require('morgan'),
     expressLayouts          = require('express-ejs-layouts'),
     marked                  = require('marked'),
+    bcrypt                  = require('bcrypt'),
     session                 = require('express-session');
 
-//var router = express.Router();
 var User = require('./models/user.js');
 var Article = require('./models/article.js');
 
@@ -39,45 +39,6 @@ server.use(methodOverride('_method'));
 server.use(morgan('short'));
 server.use(expressLayouts);
 
-var articleController = require('./controllers/articles.js');
-server.use('/articles', articleController);
-
-var userController=require('./controllers/users.js');
-server.use('/users', userController);
-
-server.use(function(req, res, next) {
-  if (req.session.userId) {
-    next();
-  } else {
-    res.render('login');
-  }
-})
-//CATCHALL ROUTES
-// server.get('/', function(req, res){
-//   if (session.userId) {
-//     console.log("loading user");
-//     User.findById(session.userId, function (err, user) {
-//       if (err) {
-//         console.log ("can't find user,", err);
-//       } else {
-//         console.log(user);
-//         res.render('welcome', {user: user});
-//       }
-//     });
-//   } else {
-//     res.render('login');
-//   }
-// });
-server.get('/', function (req, res) {
-  if (session.userId) {
-    User.findById(session.userId, function (err, user) {
-      res.render('welcome', {user: user});
-    });
-  } else {
-    res.render('login');
-  }
-});
-
 server.post('/', function (req, res) {
   var userEntered = req.body.user;
   console.log("user entered:",userEntered);
@@ -89,6 +50,61 @@ server.post('/', function (req, res) {
       req.session.userId = user._id;
       console.log(req.session);
       res.render('welcome', {user: user});
+    }
+  });
+});
+
+server.post('/new', function(req, res) {
+  var userEntered = req.body.user;
+  bcrypt.genSalt(10, function(err, salt) {
+    bcrypt.hash(userEntered.password, salt, function (err, hash) {
+      userEntered.password = hash;
+      console.log(hash);
+      var newUser = new User(userEntered);
+      newUser.save(function(err, user){
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("new user is", newUser);
+          // Users.find({}, function(err, usersArray) {
+          //   if (err) {
+          //     console.log(err);
+          //   } else {
+          //     res.render('index', {users: usersArray});
+          //   }
+          // });
+          res.redirect(301, '/');
+        }
+      });
+    })
+  });
+});
+
+var checkUserLogin = function(req, res, next) {
+  if (req.session.userId) {
+    next();
+  } else {
+    res.render('login');
+  }
+};
+
+var articleController = require('./controllers/articles.js');
+server.use('/articles', checkUserLogin, articleController);
+
+server.get('/users/new', function (req, res) {
+  console.log("let's make a new user!");
+  res.render('users/new');
+});
+
+var userController=require('./controllers/users.js');
+server.use('/users', checkUserLogin, userController);
+
+server.get('/', checkUserLogin, function (req, res) {
+  User.findById(session.userId, function (err, user) {
+    if (err) {
+      console.log(err);
+    } else {
+    res.render('welcome');
     }
   });
 });
