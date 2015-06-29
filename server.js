@@ -45,6 +45,13 @@ server.use('/articles', articleController);
 var userController=require('./controllers/users.js');
 server.use('/users', userController);
 
+server.use(function(req, res, next) {
+  if (req.session.userId) {
+    next();
+  } else {
+    res.render('login');
+  }
+})
 //CATCHALL ROUTES
 // server.get('/', function(req, res){
 //   if (session.userId) {
@@ -69,6 +76,21 @@ server.get('/', function (req, res) {
   } else {
     res.render('login');
   }
+});
+
+server.post('/', function (req, res) {
+  var userEntered = req.body.user;
+  console.log("user entered:",userEntered);
+  User.findOne({name: userEntered.name, password: userEntered.password}, function (err, user) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("user is",user);
+      req.session.userId = user._id;
+      console.log(req.session);
+      res.render('welcome', {user: user});
+    }
+  });
 });
 
 server.get('/logout', function (req, res) {
