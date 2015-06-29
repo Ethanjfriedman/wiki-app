@@ -1,0 +1,69 @@
+@import url(http://fonts.googleapis.com/css?family=Francois+One);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: white;
+}
+
+#header {
+  width: 100%;
+  height: 15vh;
+  background: lightgray;
+  display: inline-flex;
+  justify-content: flex-start;
+}
+
+.header-span {
+  color: gray;
+}
+
+.header-span + .header-span {
+  padding-left: 20%;
+  align-self: flex-end;
+  padding-bottom: 2%;
+}
+
+.header-span a {
+  text-decoration: none;
+  color: gray;
+  transition: all 0.5s ease;
+}
+
+.header-span a:hover {
+  color: white;
+  transform: translateY(-10px);
+}
+
+#corp-name {
+  font-size: 3em;
+  font-family: 'Francois One', sans-serif;
+  font-weight: bold;
+  font-style: italic;
+  padding-left: 2%;
+}
+
+nav {
+  border: 1px solid gray;
+  width: 25vh;
+  height: 100vh;
+  padding: 10px;
+}
+
+nav ul {
+  list-style-type: none;
+}
+
+#main-div {
+  padding: 2%;
+  display: inline-flex;
+  justify-content: flex-start;
+}
+
+#content-div {
+  padding-left: 5%;
+}

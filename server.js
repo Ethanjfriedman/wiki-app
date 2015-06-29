@@ -31,10 +31,17 @@ server.use(methodOverride('_method'));
 server.use(morgan('short'));
 server.use(expressLayouts);
 
+var articleController = require('./controllers/articles.js');
+server.use('/articles', articleController);
+
+//CATCHALL ROUTES
+server.get('/', function(req, res){
+  res.render('welcome');
+});
+
 
 // DATABASE + SERVER
-
-mongoose.connect('mongodb://localhost:27017/todo_app');
+mongoose.connect('mongodb://localhost:27017/ecorp');
 var db = mongoose.connection;
 
 db.on('error', function(){
