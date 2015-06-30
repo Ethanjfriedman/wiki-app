@@ -4,6 +4,7 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user.js');
 var bcrypt = require('bcrypt');
+var marked = require('marked');
 
 // INDEX --show all users
 router.get('/', function(req, res) {
@@ -33,6 +34,7 @@ router.get('/:id/show', function (req, res) {
       console.log("whoopsie", err);
     } else {
       console.log(user);
+      user.bio = marked(user.bio);
       res.render('users/show', {user: user});
     }
   });

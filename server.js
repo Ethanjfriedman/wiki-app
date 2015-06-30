@@ -78,21 +78,27 @@ server.post('/', function (req, res) {
 server.post('/new', function(req, res) {
   var userEntered = req.body.user;
   bcrypt.genSalt(10, function(err, salt) {
-    bcrypt.hash(userEntered.password, salt, function (err, hash) {
-      userEntered.password = hash;
-      var newUser = new User(userEntered);
-      newUser.save(function(err, user){
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("new user is", newUser);
-          res.redirect(301, '/');
-        }
+    if (err) {
+      res.redirect(301, '/');
+    } else {
+      bcrypt.hash(userEntered.password, salt, function (err, hash) {
+        userEntered.password = hash;
+        var newUser = new User(userEntered);
+        newUser.save(function(err, user){
+          if (err) {
+            console.log(err);
+            res.redirect(301, '/new');
+          } else {
+            console.log("new user is", newUser);
+            res.redirect(301, '/');
+          }
+        });
       });
-    });
+    }
   });
 });
 
+//checks if user is logged in; if not, renders the login page
 var checkUserLogin = function(req, res, next) {
   if (req.session.userId) {
     next();
@@ -101,6 +107,7 @@ var checkUserLogin = function(req, res, next) {
   }
 };
 
+//setting up the controllers
 var articleController = require('./controllers/articles.js');
 server.use('/articles', checkUserLogin, articleController);
 

@@ -9,7 +9,7 @@
     <%= article.editors[article.editors.length - 1].name %></a> on
     <%= article.editDates[article.editDates.length - 1] %>
     <% } %>
-    <dd>Content: <br/><%= article.content %></dd>
+    <dd>Content: <br/><%- article.content %></dd>
   </dl>
   <a href="/articles/<%= article._id %>/edit">Edit this article</a>
 </div>

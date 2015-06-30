@@ -67,6 +67,7 @@ router.post('/new', function(req, res) {
 //SHOW -- detail view of one article
 router.get('/:id/show', function (req, res) {
   Article.findById(req.params.id, function(err, article) {
+    article.content = marked(article.content);
     if (err) {
       console.log("dagnabbit", err);
     } else {
@@ -79,6 +80,7 @@ router.get('/:id/show', function (req, res) {
 });
 
 //DELETE
+//FUNCTIONALITY WILL BE UNAVAILABLE EXCEPT TO ADMINISTRATORS
 
 // EDIT -- form to edit an article
 router.get('/:id/edit', function(req, res) {
