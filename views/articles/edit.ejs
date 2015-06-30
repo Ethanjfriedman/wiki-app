@@ -3,8 +3,6 @@
   <form id="edit-article-form" action="/articles/edit" method="POST">
     <label for="article-title">Article title: </label>
     <input type="text" class="article-input" id="article-title" value="<%= article.title %>" name="article[title]" /><br/>
-    <label for="article-author">Author: </label>
-    <input type="text" class="article-input" value="<%= article.author %>" name="article[author]" /><br/>
     <label for="article-category">Category: </label>
     <select class="article-input" id="article-category" value="<%= article.category %>"name="article[category]">
       <option value="Procedures">Procedures</option>
@@ -16,7 +14,7 @@
       <option value="New Employee Info">Onboarding / Getting Started</option>
     </select><br/>
     <label for="article-content">Article content: </label>
-    <textarea class="article-input" value="<%= article.title %>"id="article-content" name="article[content]">
+    <input type="textarea" class="article-input" value="<%= article.content %>" id="article-content" name="article[content]">
     </textarea>
     <input type="hidden" name="article[editDates][]" value="<%= new Date() %>"/>
     <input type="submit" value="Create article"/>
