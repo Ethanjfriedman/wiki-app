@@ -24,19 +24,7 @@ body {
 }
 
 .header-span {
-  color: darkgray;
   margin-right: 5%;
-}
-
-.header-span a {
-  text-decoration: none;
-  color: gray;
-  transition: all 0.5s ease;
-}
-
-.header-span a:hover {
-  color: white;
-  text-shadow: 0 1px gray;
 }
 
 #corp-name {
@@ -45,6 +33,18 @@ body {
   font-weight: bold;
   font-style: italic;
   padding-left: 2%;
+  transition: all 1s ease;
+  color: lightgray;
+}
+
+#corp-name .loaded {
+  font-size: 3em;
+  font-family: 'Francois One', sans-serif;
+  font-weight: bold;
+  font-style: italic;
+  padding-left: 2%;
+  font-size: 5em;
+  color: purple;
 }
 
 nav {
@@ -55,7 +55,7 @@ nav {
   background: -webkit-linear-gradient(left top, white , lightgray);
   background: -o-linear-gradient(bottom right, white, lightgray);
   background: -moz-linear-gradient(bottom right, white, lightgray);
-  background: linear-gradient(to bottom right, white , darkgray);
+  background: linear-gradient(to bottom right, white, darkgray);
 }
 
 nav ul, #users-list, #user-articles-created-li {
@@ -67,18 +67,20 @@ nav ul {
   display: inline-flex;
   justify-content:flex-end;
   align-items: baseline;
+  text-align: center;
 }
 
 nav ul li {
   width: 10%;
+  margin-top: 2%;
 }
 
-nav ul li a {
+a {
   transition: all 0.5s ease;
   text-decoration: none;
 }
 
-nav ul li a:hover {
+a:hover {
   color: white;
   font-weight: bold;
   text-shadow: 1px 1px gray;
