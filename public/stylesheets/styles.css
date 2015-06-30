@@ -7,7 +7,8 @@
 }
 
 body {
-  background: white;
+  background: lightgray;
+  height: 100vh;
 }
 
 #header {
@@ -64,7 +65,7 @@ nav ul, #users-list, #user-articles-created-li {
 nav ul {
   width: 100%;
   display: inline-flex;
-  justify-content: flex-start;
+  justify-content:flex-end;
   align-items: baseline;
 }
 
@@ -107,7 +108,24 @@ h2 {
   margin-bottom: 1em;
 }
 
+form {
+  display: inline-flex;
+  flex-direction: column;
+}
 p {
   margin-bottom: 0.5em;
   margin-left: 1em;
+}
+
+input {
+  transition: all 0.4s ease;
+}
+
+input:focus {
+  background: #e5fff3;
+}
+
+input[type="textarea"] {
+  width: 60vw;
+  height: 40vh;
 }

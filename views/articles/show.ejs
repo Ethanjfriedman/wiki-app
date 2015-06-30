@@ -1,10 +1,12 @@
 <div id="content-div">
   <dl>
-    <dt><%= article.title %></dt>
-    <dd>By <%= article.author.name %> on <%= article.editDates[0] %>
+    <dt><h2><%= article.title %></h2></dt>
+    <dd>By <a href="/users/<%= article.author._id %>/show">
+    <%= article.author.name %></a> on <%= article.editDates[0] %>
     <dd>Category: <%= article.category %></dd>
     <% if (article.editors.length) { %>
-    <dd>Last edited by <%= article.editors[article.editors.length - 1].name %> on
+    <dd>Last edited by <a href="/users/<%= article.editors[article.editors.length - 1]._id %>/show">
+    <%= article.editors[article.editors.length - 1].name %></a> on
     <%= article.editDates[article.editDates.length - 1] %>
     <% } %>
     <dd>Content: <br/><%= article.content %></dd>

@@ -2,6 +2,7 @@
   <dl>
     <dt class="users-list-name"><%= user.name %></dt>
     <dd>Title: <%= user.title %>, <%= user.department %></dd>
+    <dd>Email: <%= user.email %></dd>
     <% if (user.articlesCreated) { %>
     <dd><ul>Articles created: <% user.articlesCreated.forEach(function(article, i) { %>
       <li id="user-articles-created-li"><a href="/articles/<%= article._id %>/show"><%= article.title %></a></li>

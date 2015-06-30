@@ -88,5 +88,31 @@ router.get('/:id/edit', function(req, res) {
 });
 
 //UPDATE -- update the article
+router.post('/:id/edit', function (req, res) {
+  var submission = req.body.article;
+    User.findById(req.session.userId,function (err, user) {
+      if (err) {
+        console.log(err);
+        res.redirect(301, '/');
+      } else {
+        submission.editors.push(user);
+        Article.findByIdAndUpdate(req.params.id, {
+          title: submission.title,
+          category: submission.category,
+          editors: submission.editors,
+          editDates: submission.editDates,
+          content: submission.content
+        }, function (err, article) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log('req params id:', req.params.id);
+              res.redirect(301, '/articles/' + req.params.id + '/show');
+          }
+      });
+    }
+  });
+});
+
 
 module.exports = router;

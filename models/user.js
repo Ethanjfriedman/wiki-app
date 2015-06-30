@@ -10,6 +10,7 @@ var userSchema = Schema({
   articlesCreated: [],
   articlesEdited: [],
   bio: String,
+  email: String,
   password: {type: String, required: true}
 });
 

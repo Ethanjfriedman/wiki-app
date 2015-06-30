@@ -1,6 +1,6 @@
 <div id="content-div">
   <h2>Edit Article</h2>
-  <form id="edit-article-form" action="/articles/edit" method="POST">
+  <form id="edit-article-form" action="/articles/<%= article._id %>/edit" method="POST">
     <label for="article-title">Article title: </label>
     <input type="text" class="article-input" id="article-title" value="<%= article.title %>" name="article[title]" /><br/>
     <label for="article-category">Category: </label>
@@ -17,6 +17,7 @@
     <input type="textarea" class="article-input" value="<%= article.content %>" id="article-content" name="article[content]">
     </textarea>
     <input type="hidden" name="article[editDates][]" value="<%= new Date() %>"/>
-    <input type="submit" value="Create article"/>
+    <input type="hidden" name="article[editors][]" value="<%= article.editors %>" />
+    <input type="submit" value="Submit edits"/>
   </form>
 </div>
