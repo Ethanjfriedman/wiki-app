@@ -20,9 +20,13 @@ var express                 = require('express'),
     bcrypt                  = require('bcrypt'),
     session                 = require('express-session');
 
-//setting the port to either the process PORT if defined, otherwise it'll
-//default to 3000
+/*setting the port to either the process PORT if defined, otherwise it'll
+default to 3000*/
 var PORT = process.env.PORT || 3000;
+
+//setting mongoDB location to either process.env.MONGOLAB_URI if defined (i.e.,
+//on heroku) or to the local one.
+var MONGOURI = process.env.MONGOLAB_URI || 'mongodb://localhost:27017/ecorp';
 
 var User = require('./models/user.js');
 var Article = require('./models/article.js');
@@ -120,7 +124,7 @@ server.get('/logout', function (req, res) {
 });
 
 // DATABASE + SERVER
-mongoose.connect('mongodb://localhost:27017/ecorp');
+mongoose.connect(MONGOURI);
 var db = mongoose.connection;
 
 db.on('error', function(){
