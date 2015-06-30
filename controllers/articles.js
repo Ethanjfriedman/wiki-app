@@ -58,15 +58,17 @@ router.get('/new', function(req, res) {
 router.post('/new', function(req, res) {
   var submission =  req.body.article;
   var newArticle = new Article(submission);
-
-  newArticle.save(function(err, article){
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(article);
-      res.redirect(301, '/articles');
-    }
-  });
+  // User.findById(session.userId, function (err, user) {
+  //
+  // })
+    newArticle.save(function(err, article){
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(article);
+        res.redirect(301, '/articles');
+      }
+    });
 });
 
 //SHOW -- detail view of one article

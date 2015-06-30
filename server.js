@@ -39,18 +39,45 @@ server.use(methodOverride('_method'));
 server.use(morgan('short'));
 server.use(expressLayouts);
 
+//ROUTE FOR CHECKING THE SUBMITTED USERNAME AND PASSWORD AGAINST STORED VALUES
+//TODO MOVE TO SESSION CONTROLLER
+
+// //THIS IS FAKE LOGIN CODE WITHOUT ENCRYPTION
+// server.post('/', function (req, res) {
+//   var userEntered = req.body.user;
+//   console.log("user entered:",userEntered);
+//   User.findOne({name: userEntered.name, password: userEntered.password}, function (err, user) {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log("user is",user);
+//       req.session.userId = user._id;
+//       console.log(req.session);
+//       res.render('welcome', {user: user});
+//     }
+//   });
+// });
+
+//WITH BCRYPT
 server.post('/', function (req, res) {
   var userEntered = req.body.user;
-  console.log("user entered:",userEntered);
-  User.findOne({name: userEntered.name, password: userEntered.password}, function (err, user) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("user is",user);
-      req.session.userId = user._id;
-      console.log(req.session);
-      res.render('welcome', {user: user});
-    }
+  User.findOne({name: userEntered.name}, function (err, user) {
+    console.log(user);
+    //bcrypt.hash(userEntered.password, 10, function (err, hash) {
+      //console.log("hash is", hash);
+      //console.log("and stored password is", user.password);
+      bcrypt.compare(userEntered.password, user.password, function (err, result) {
+        console.log(result);
+        if (result) {
+          console.log("user is", user);
+          req.session.userId = user._id;
+          res.render('welcome', {user: user});
+        } else {
+          console.log("WRONG PASSWORD, BITCH"); //FIXME
+          res.render('login');
+        }
+      });
+    // });
   });
 });
 
@@ -66,13 +93,6 @@ server.post('/new', function(req, res) {
           console.log(err);
         } else {
           console.log("new user is", newUser);
-          // Users.find({}, function(err, usersArray) {
-          //   if (err) {
-          //     console.log(err);
-          //   } else {
-          //     res.render('index', {users: usersArray});
-          //   }
-          // });
           res.redirect(301, '/');
         }
       });
