@@ -11,7 +11,6 @@ var marked = require('marked');
 router.get('/', function (req, res) {
   User.find({}, function (err, usersArray) {
     if (err) {
-      console.log(users);
       console.log("Error pulling up users database", err);
     } else {
       Article.find({}, function(err, articlesArray) {
@@ -43,9 +42,11 @@ router.get('/new', function(req, res) {
 router.post('/new', function(req, res) {
   var submission = req.body.article;
   submission.editors = [];
+  console.log("session.userId:", req.session.userId);
   User.findById(req.session.userId, function (err, user) {
     submission.editors.push(user);
     submission.author = user;
+    console.log("subission",submission);
     var newArticle = new Article(submission);
     newArticle.save(function(err, article){
       if (err) {

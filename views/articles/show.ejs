@@ -1,9 +1,9 @@
 <div id="content-div">
   <dl>
     <dt><%= article.title %></dt>
-    <dd>By <%= article.editors[0].name %> on <%= article.editDates[0] %>
+    <dd>By <%= article.author.name %> on <%= article.editDates[0] %>
     <dd>Category: <%= article.category %></dd>
-    <% if (article.editors.length > 0) { %>
+    <% if (article.editors.length) { %>
     <dd>Last edited by <%= article.editors[article.editors.length - 1].name %> on
     <%= article.editDates[article.editDates.length - 1] %>
     <% } %>

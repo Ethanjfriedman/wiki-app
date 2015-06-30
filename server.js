@@ -58,16 +58,19 @@ server.use(expressLayouts);
 server.post('/', function (req, res) {
   var userEntered = req.body.user;
   User.findOne({name: userEntered.name}, function (err, user) {
-      bcrypt.compare(userEntered.password, user.password, function (err, result) {
-        if (result) {
-          req.session.userId = user._id;
-          res.render('welcome', {user: user});
-        } else {
-          console.log("WRONG PASSWORD");
-          res.render('login');
-        }
-      });
-    // });
+      if (err) {
+        res.redirect(301, '/')
+      } else {
+        bcrypt.compare(userEntered.password, user.password, function (err, result) {
+          if (result) {
+            req.session.userId = user._id;
+            res.render('welcome', {user: user});
+          } else {
+            console.log("WRONG PASSWORD");
+            res.render('login');
+          }
+        });
+      }
   });
 });
 
