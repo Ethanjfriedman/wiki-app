@@ -1,4 +1,12 @@
+/*-------------------------------------------
+-     Mock Internal Corporate Wiki app      -
+-Ethan Friedman, GA Web Dev Intensive Course-
+-                 June 2015                 -
+-      Contact at ethanjf99@gmail.com       -
+---------------------------------------------*/
+
 console.log("Server.js for wiki app is loading...");
+
 //GLOBAL VARS
 var express                 = require('express'),
     server                  = express(),
@@ -11,6 +19,10 @@ var express                 = require('express'),
     marked                  = require('marked'),
     bcrypt                  = require('bcrypt'),
     session                 = require('express-session');
+
+//setting the port to either the process PORT if defined, otherwise it'll
+//default to 3000
+var PORT = process.env.PORT || 3000;
 
 var User = require('./models/user.js');
 var Article = require('./models/article.js');
@@ -27,9 +39,6 @@ server.use(session({
   saveUninitialized: false
 }));
 
-//TODO GET RID OF THIS TEST CODE
-//session.userId = "559161b69096189e55061d73"
-
 server.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -41,32 +50,12 @@ server.use(expressLayouts);
 
 //ROUTE FOR CHECKING THE SUBMITTED USERNAME AND PASSWORD AGAINST STORED VALUES
 //TODO MOVE TO SESSION CONTROLLER
-
-// //THIS IS FAKE LOGIN CODE WITHOUT ENCRYPTION
-// server.post('/', function (req, res) {
-//   var userEntered = req.body.user;
-//   console.log("user entered:",userEntered);
-//   User.findOne({name: userEntered.name, password: userEntered.password}, function (err, user) {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       console.log("user is",user);
-//       req.session.userId = user._id;
-//       console.log(req.session);
-//       res.render('welcome', {user: user});
-//     }
-//   });
-// });
-
-//WITH BCRYPT
+//WITH BCRYPT ENABLED
 server.post('/', function (req, res) {
   var userEntered = req.body.user;
   User.findOne({name: userEntered.name}, function (err, user) {
-    //console.log(user);
       bcrypt.compare(userEntered.password, user.password, function (err, result) {
-        //console.log(result);
         if (result) {
-          //console.log("user is", user);
           req.session.userId = user._id;
           res.render('welcome', {user: user});
         } else {
@@ -78,12 +67,12 @@ server.post('/', function (req, res) {
   });
 });
 
+//CREATING A NEW USER
 server.post('/new', function(req, res) {
   var userEntered = req.body.user;
   bcrypt.genSalt(10, function(err, salt) {
     bcrypt.hash(userEntered.password, salt, function (err, hash) {
       userEntered.password = hash;
-      console.log(hash);
       var newUser = new User(userEntered);
       newUser.save(function(err, user){
         if (err) {
@@ -117,11 +106,11 @@ var userController=require('./controllers/users.js');
 server.use('/users', checkUserLogin, userController);
 
 server.get('/', checkUserLogin, function (req, res) {
-  User.findById(session.userId, function (err, user) {
+  User.findById(req.session.userId, function (err, user) {
     if (err) {
       console.log(err);
     } else {
-    res.render('welcome');
+    res.render('welcome', {user: user});
     }
   });
 });
@@ -140,7 +129,7 @@ db.on('error', function(){
 
 db.once('open', function(){
   console.log("Database UP AND RUNNING!");
-  server.listen(3000, function(){
-    console.log("Server UP AND RUNNING ON PORT 3000!")
+  server.listen(PORT, function(){
+    console.log("Server UP AND RUNNING ON PORT", PORT);
   });
 });

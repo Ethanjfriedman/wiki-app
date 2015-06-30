@@ -7,21 +7,19 @@
   </head>
   <body>
     <div id="header">
-      <span id="corp-name" class="header-span">E Corp Internal Wiki</span>
-      <span class="header-span"><a href="/logout">LOGOUT</a></span>
+      <span id="corp-name" class="header-span">Cyberdyne Systems Internal Wiki</span>
     </div>
+    <nav>
+      <ul id="link-ul" class="nav-ul">
+        <li><a href="/">Home Page</a></li>
+        <li><a href="/articles">All Articles</a></li>
+        <li><a href="/articles/new">New Article</a></li>
+        <li><a href="/users">All Users</a></li>
+      </ul>
+      <ul id="nav-articles-ul" class="nav-ul">
+      </ul>
+    </nav>
     <div id="main-div">
-      <nav>
-        <ul id="link-ul" class="nav-ul">
-          <li><a href="/">Home Page</a></li>
-          <li><a href="/articles">All Articles</a></li>
-          <li><a href="/articles/new">New Article</a></li>
-          <li><a href="/users">All Users</a></li>
-        </ul>
-        <ul id="nav-articles-ul" class="nav-ul">
-        </ul>
-      </nav>
-      <% include head %>
       <%- body %>
     </div>
   </body>

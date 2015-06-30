@@ -7,6 +7,7 @@ var User = require('../models/user.js');
 var session = require('express-session');
 var marked = require('marked');
 
+//INDEX -- display all articles
 router.get('/', function (req, res) {
   User.find({}, function (err, usersArray) {
     if (err) {
