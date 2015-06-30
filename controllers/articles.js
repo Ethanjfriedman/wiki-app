@@ -7,23 +7,6 @@ var User = require('../models/user.js');
 var session = require('express-session');
 var marked = require('marked');
 
-// INDEX --show all articles
-// router.get('/', function(req, res) {
-//
-//   var users = User.find({}, function (err, usersArray) {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       Article.find({}, function(err, articlesArray) {
-//         if (err) {
-//           console.log(err);
-//         } else {
-//           res.render('articles/index', {articles: articlesArray, users: usersArray});
-//         }
-//       });
-//     }
-//   });
-
 router.get('/', function (req, res) {
   User.find({}, function (err, usersArray) {
     if (err) {
@@ -43,20 +26,19 @@ router.get('/', function (req, res) {
 //NEW --form to make new one
 router.get('/new', function(req, res) {
   //TEST HERE TO SEE IF SESSION EXISTS AND USER IS AVAILABLE IF SO:
+  //testing here is unneccessary since I moved it to server.js (see the checkUserLogin() function )
   User.findById(req.session.userId, function (err, user) {
     if (err) {
       console.log(err);
+      res.redirect(404, '/login');
     } else {
       res.render('articles/new');
     }
-
   });
-  //if not redirect to login page
 })
 
 //CREATE --create the new one
 router.post('/new', function(req, res) {
-  //console.log("session id", session.userId);
   var submission = req.body.article;
   submission.editors = [];
   User.findById(req.session.userId, function (err, user) {
