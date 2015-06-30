@@ -11,6 +11,7 @@ var marked = require('marked');
 router.get('/', function (req, res) {
   User.find({}, function (err, usersArray) {
     if (err) {
+      console.log(users);
       console.log("Error pulling up users database", err);
     } else {
       Article.find({}, function(err, articlesArray) {
@@ -70,7 +71,6 @@ router.get('/:id/show', function (req, res) {
     } else {
       console.log("ID: ", article.author._id);
       User.findById(article.author._id, function (err, user) {
-        console.log("user", user);
         res.render('articles/show', {article: article, user: user});
       });
     }

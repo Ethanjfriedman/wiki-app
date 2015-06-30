@@ -21,34 +21,10 @@ router.get('/new', function(req, res) {
   res.render('users/new');
 })
 
-//CREATE --create the new one
-router.post('/new', function(req, res) {
-  var userEntered = req.body.user;
-  bcrypt.genSalt(10, function(err, salt) {
-    bcrypt.hash(userEntered.password, salt, function (err, hash) {
-      userEntered.password = hash;
-      console.log(hash);
-    })
-  });
-  //VAR userEntered = req.body.user
-  //BCRYPT userEntered.password = HASH (userEntered.password)
-  var newUser = new User(userEntered);
-
-  newUser.save(function(err, user){
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("new user:",user);
-      Users.find({}, function(err, usersArray) {
-        if (err) {
-          console.log(err);
-        } else {
-          res.render('index', {users: usersArray});
-        }
-      }); //WHERE DO I WANT THIS TO REDIRECT TO? FIXME
-    }
-  });
-});
+/*CREATE --create the new one
+The route to create a new user has been moved to server.js because otherwise
+it conflicts with the checkUserLogin() function. It will eventually be moved to
+controllers/session.js*/
 
 //SHOW -- detail view of one user
 router.get('/:id/show', function (req, res) {

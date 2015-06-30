@@ -20,7 +20,7 @@ var express                 = require('express'),
     bcrypt                  = require('bcrypt'),
     session                 = require('express-session');
 
-/*setting the port to either the process PORT if defined, otherwise it'll
+/*setting the port to either the process PORT if defined (on heroku), otherwise it'll
 default to 3000*/
 var PORT = process.env.PORT || 3000;
 
