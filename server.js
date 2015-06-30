@@ -62,18 +62,15 @@ server.use(expressLayouts);
 server.post('/', function (req, res) {
   var userEntered = req.body.user;
   User.findOne({name: userEntered.name}, function (err, user) {
-    console.log(user);
-    //bcrypt.hash(userEntered.password, 10, function (err, hash) {
-      //console.log("hash is", hash);
-      //console.log("and stored password is", user.password);
+    //console.log(user);
       bcrypt.compare(userEntered.password, user.password, function (err, result) {
-        console.log(result);
+        //console.log(result);
         if (result) {
-          console.log("user is", user);
+          //console.log("user is", user);
           req.session.userId = user._id;
           res.render('welcome', {user: user});
         } else {
-          console.log("WRONG PASSWORD, BITCH"); //FIXME
+          console.log("WRONG PASSWORD");
           res.render('login');
         }
       });
@@ -96,7 +93,7 @@ server.post('/new', function(req, res) {
           res.redirect(301, '/');
         }
       });
-    })
+    });
   });
 });
 

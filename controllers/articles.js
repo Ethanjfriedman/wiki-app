@@ -43,7 +43,7 @@ router.get('/', function (req, res) {
 //NEW --form to make new one
 router.get('/new', function(req, res) {
   //TEST HERE TO SEE IF SESSION EXISTS AND USER IS AVAILABLE IF SO:
-  User.findById(session.userId, function (err, user) {
+  User.findById(req.session.userId, function (err, user) {
     if (err) {
       console.log(err);
     } else {
@@ -56,19 +56,28 @@ router.get('/new', function(req, res) {
 
 //CREATE --create the new one
 router.post('/new', function(req, res) {
-  var submission =  req.body.article;
-  var newArticle = new Article(submission);
-  // User.findById(session.userId, function (err, user) {
-  //
-  // })
+  //console.log("session id", session.userId);
+  var submission = req.body.article;
+  submission.editors = [];
+  User.findById(req.session.userId, function (err, user) {
+    submission.editors.push(user._id);
+    submission.author = user._id;
+    var newArticle = new Article(submission);
     newArticle.save(function(err, article){
       if (err) {
         console.log(err);
       } else {
-        console.log(article);
-        res.redirect(301, '/articles');
+        //console.log(article);
+        User.findByIdAndUpdate(req.session.userId, {articlesCreated: article}, function (err, user) {
+          if (err) {
+            console.log(err);
+          } else {
+            res.redirect(301, '/articles');
+          }
+        });
       }
     });
+  });
 });
 
 //SHOW -- detail view of one article
@@ -77,9 +86,12 @@ router.get('/:id/show', function (req, res) {
     if (err) {
       console.log("dagnabbit", err);
     } else {
-      res.render('articles/show', {article: article});
+      User.findById(article.author, function (err, user) {
+        console.log("author of article is", user); 
+        res.render('articles/show', {article: article, user: user});
+      });
     }
-  })
+  });
 });
 
 //DELETE

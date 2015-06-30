@@ -63,7 +63,7 @@ nav {
   background: linear-gradient(to bottom right, white , darkgray);
 }
 
-nav ul, #users-list {
+nav ul, #users-list, #user-articles-created-li {
   list-style-type: none;
 }
 

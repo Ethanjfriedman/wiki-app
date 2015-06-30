@@ -4,7 +4,7 @@
     <dd>Title: <%= user.title %>, <%= user.department %></dd>
     <% if (user.articlesCreated) { %>
     <dd><ul>Articles created: <% user.articlesCreated.forEach(function(article, i) { %>
-      <li>article</li>
+      <li id="user-articles-created-li"><a href="/articles/<%= article._id %>/show"><%= article.title %></a></li>
       <% }); %>
     <% } %></dd>
 
