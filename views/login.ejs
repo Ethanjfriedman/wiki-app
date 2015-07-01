@@ -2,10 +2,10 @@
   <h2>User Login is required for Access to the Wiki</h2>
   <form id="login-form" action="/" method="POST">
   <label for="user-name">Name:</label>
-  <input type="text" id="user-name" name="user[name]" placeholder="Firstname Lastname" autofocus>
+  <input type="text" id="user-name" name="user[name]" placeholder="Firstname Lastname" autofocus required>
   <label for="user-password">Password:</label>
-  <input type="password" id="user-password" name="user[password]">
+  <input type="password" id="user-password" name="user[password]" required>
   <input type="submit">
   </form>
-  <a href="/users/new">Register as New User</a>
+  <a href="/users/new">Register as a New User</a>
 </div>

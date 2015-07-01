@@ -2,7 +2,7 @@
   <h2>Add New Article</h2>
   <form id="new-article-form" action="/articles/new" method="POST">
     <label for="article-title">Article title: </label>
-    <input type="text" class="article-input" id="article-title" placeholder="Title" name="article[title]" autofocus /><br/>
+    <input type="text" class="article-input" id="article-title" placeholder="Title" name="article[title]" autofocus required /><br/>
     <label for="article-category">Category: </label>
     <select class="article-input" id="article-category" name="article[category]">
       <option value="Human Resources">Human Resources</option>
@@ -13,10 +13,10 @@
       <option value="New Employee Info">Onboarding / Getting Started</option>
       <option value="Sales">Sales</option>
     </select><br/>
-    <label for="article-content">Article content: (formatted using <a href="https://en.wikipedia.org/wiki/Markdown">markdown</a>)<br/>
-    (link redirects to external site)</label>
-    <input type="textarea" class="article-input" id="article-content" name="article[content]" />
-    <input type="hidden" name="article[editDates]" value="<%= new Date() %>"/>
+    <label for="article-content">Article content, formatted using <a href="https://en.wikipedia.org/wiki/Markdown">markdown</a>
+    <span id="redirect">(link redirects to external site):</span></label>
+    <textarea class="article-input" id="article-content" name="article[content]" rows="10" cols="30" required></textarea>
+    <input type="hidden" name="article[editDates]" value="<%= new Date() %>"><br/>
     <input type="submit" value="Create article"/>
   </form>
 </div>

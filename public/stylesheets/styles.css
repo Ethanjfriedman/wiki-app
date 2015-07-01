@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Francois+One);
+@import url(http://fonts.googleapis.com/css?family=Francois+One|Open+Sans);
 
 * {
   margin: 0;
@@ -47,6 +47,7 @@ body {
 
 #corp-name:hover {
   color: red;
+  cursor: crosshair;
 }
 
 nav {
@@ -58,6 +59,7 @@ nav {
   background: -o-linear-gradient(bottom right, white, lightgray);
   background: -moz-linear-gradient(bottom right, white, lightgray);
   background: linear-gradient(to bottom right, white, darkgray);
+  font-family: 'Francois One', sans-serif;
 }
 
 nav ul, #users-list, #user-articles-created-li {
@@ -97,6 +99,7 @@ a:hover {
   padding: 2%;
   display: inline-flex;
   justify-content: flex-start;
+  font-family: 'Open sans', sans-serif;
 }
 
 #logout {
@@ -119,6 +122,7 @@ dd {
 h2 {
   font-weight: normal;
   margin-bottom: 1em;
+  color: dimgray;
 }
 
 form {
@@ -153,6 +157,7 @@ input[type="textarea"] {
 footer {
   padding-left: 2%;
   font-size: 0.75em;
+  font-family: 'Open sans', sans-serif;
 }
 
 .article-list-item, .users-list-item {
@@ -163,4 +168,12 @@ footer {
 .login-div {
   display: inline-flex;
   flex-direction: column;
+}
+
+.hidden {
+  display: none;
+}
+
+#redirect {
+  font-size: 0.75em;
 }

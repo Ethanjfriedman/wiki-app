@@ -2,7 +2,7 @@
   <h2>Add New User</h2>
   <form id="new-user-form" action="/new" method="POST">
     <label for="user-name">Name: </label>
-    <input type="text" id="user-name" name="user[name]" class="user-input" placeholder="Firstname Lastname" autofocus /><br/>
+    <input type="text" id="user-name" name="user[name]" class="user-input" placeholder="Firstname Lastname" autofocus required /><br/>
     <label for="user-title">Title: </label>
     <input type="text" class="user-input" id="user-title" name="user[title]" placeholder="Title" /><br/>
     <label for="user-department">Department: </label>
@@ -22,12 +22,12 @@
       <option value="Sales">Sales</option>
       <option value="New Employee Info">Onboarding / Getting Started</option>
     </select><br/>
-    <label for="user-bio">About me: (formatted using <a href="https://help.github.com/articles/markdown-basics/">markdown</a>)<br/>(link redirects to external site)</label>
-    <input type="textarea" id="user-bio" class="user-input" name="user[bio]"></textarea><br/>
+    <label for="user-bio">About me, formatted using <a href="https://help.github.com/articles/markdown-basics/">markdown </a><span id="redirect">(link redirects to external site)</span></label>
+    <textarea id="user-bio" class="user-input" name="user[bio]"rows="10" cols="30"></textarea><br/>
     <label for="user-email">Email address: </label>
     <input type="email" id="user-email" class="user-input" name="user[email]" /><br/>
     <label for="user-password">Password: </label>
-    <input type="password" id="user-password" class="user-input" name="user[password]" /><br/>
+    <input type="password" id="user-password" class="user-input" name="user[password] required" /><br/>
     <input type="submit" value="Add New User"/>
   </form>
 </div>
