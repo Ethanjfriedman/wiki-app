@@ -130,7 +130,12 @@ server.get('/', checkUserLogin, function (req, res) {
 });
 
 server.get('/logout', function (req, res) {
-  res.render('logout');
+  if (req.session.userId) {
+    req.session.userId = "";
+    res.redirect(301, '/');
+  } else {
+    res.redirect(301, '/');
+  }
 });
 
 // DATABASE + SERVER

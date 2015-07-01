@@ -82,16 +82,25 @@ a {
   text-decoration: none;
 }
 
+a:visited {
+  color: dimgray;
+}
+
 a:hover {
   color: white;
   font-weight: bold;
-  text-shadow: 1px 1px gray;
+  tex-shadow: 0 1px gray;
 }
+
 
 #main-div {
   padding: 2%;
   display: inline-flex;
   justify-content: flex-start;
+}
+
+#logout {
+  align-self: flex-end;
 }
 
 #content-div {
@@ -149,4 +158,9 @@ footer {
 .article-list-item, .users-list-item {
   position: relative;
   margin-left: 0.5em;
+}
+
+.login-div {
+  display: inline-flex;
+  flex-direction: column;
 }

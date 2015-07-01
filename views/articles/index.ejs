@@ -5,7 +5,8 @@
   <dt class="article-list-title"><a href="/articles/<%= article._id %>/show"><%= article.title %></a></dt>
   <dd class="article-list-items">
     <span class="article-list-item">Category: <%= article.category %></span>
-    <span class="article-list-item">Author: <%= article.author.name %> on <%= article.editDates[0] %></span>.
+    <span class="article-list-item">
+    Author: <a href="/users/<%= article.author._id %>/show"><%= article.author.name %></a> on <%= article.editDates[0] %></span>.
   </dd>
   <% }); %>
   </dl>
