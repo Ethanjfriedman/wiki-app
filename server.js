@@ -59,7 +59,9 @@ server.post('/', function (req, res) {
   var userEntered = req.body.user;
   User.findOne({name: userEntered.name}, function (err, user) {
       if (err) {
-        res.redirect(301, '/')
+        res.redirect(301, '/');
+      } else if (user == null) {
+        res.redirect(301, '/');
       } else {
         bcrypt.compare(userEntered.password, user.password, function (err, result) {
           if (result) {
