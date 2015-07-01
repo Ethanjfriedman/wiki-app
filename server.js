@@ -111,6 +111,7 @@ var checkUserLogin = function(req, res, next) {
 var articleController = require('./controllers/articles.js');
 server.use('/articles', checkUserLogin, articleController);
 
+//ROUTE TO NEW USER CREATION (THIS BELONGS IN SESSIONS CONTROLLER)
 server.get('/users/new', function (req, res) {
   console.log("let's make a new user!");
   res.render('users/new');
@@ -119,6 +120,7 @@ server.get('/users/new', function (req, res) {
 var userController=require('./controllers/users.js');
 server.use('/users', checkUserLogin, userController);
 
+//ROUTE TO THE WELCOME PAGE
 server.get('/', checkUserLogin, function (req, res) {
   User.findById(req.session.userId, function (err, user) {
     if (err) {
@@ -129,6 +131,7 @@ server.get('/', checkUserLogin, function (req, res) {
   });
 });
 
+//ROUTE TO LOGOUT A USER
 server.get('/logout', function (req, res) {
   if (req.session.userId) {
     req.session.userId = "";

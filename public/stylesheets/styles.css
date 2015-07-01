@@ -128,6 +128,7 @@ h2 {
 form {
   display: inline-flex;
   flex-direction: column;
+  width: 40%;
 }
 
 p {
@@ -158,6 +159,15 @@ footer {
   padding-left: 2%;
   font-size: 0.75em;
   font-family: 'Open sans', sans-serif;
+}
+
+#term {
+  transition: all 0.5s ease;
+}
+
+#term:hover {
+  color: red;
+  font-weight: bold;
 }
 
 .article-list-item, .users-list-item {

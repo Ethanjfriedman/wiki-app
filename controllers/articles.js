@@ -9,11 +9,11 @@ var marked = require('marked');
 
 //INDEX -- display all articles
 router.get('/', function (req, res) {
-  User.find({}, function (err, usersArray) {
+  User.find({}, function (err, usersArray) { //get all the users
     if (err) {
       console.log("Error pulling up users database", err);
     } else {
-      Article.find({}, function(err, articlesArray) {
+      Article.find({}, function(err, articlesArray) { //get all the articles
         if (err) {
           console.log("Error pulling up articles database", err);
         } else {
@@ -42,21 +42,23 @@ router.get('/new', function(req, res) {
 router.post('/new', function(req, res) {
   var submission = req.body.article;
   submission.editors = [];
-  console.log("session.userId:", req.session.userId);
+
+  //now we need to grab the mongo doc for the current user so we can push it in
+  //to the articles' author and editors fields
   User.findById(req.session.userId, function (err, user) {
     submission.editors.push(user);
     submission.author = user;
-    console.log("subission",submission);
-    var newArticle = new Article(submission);
-    newArticle.save(function(err, article){
+    var newArticle = new Article(submission); //creating the new article
+    newArticle.save(function(err, article){ //and saving it
       if (err) {
         console.log(err);
       } else {
+        //now we need to update the current user's articlesCreated fields
         User.findByIdAndUpdate(req.session.userId, {articlesCreated: article}, function (err, user) {
           if (err) {
             console.log(err);
           } else {
-            res.redirect(301, '/articles');
+            res.redirect(301, '/articles'); //and finally redirecting. whew!
           }
         });
       }
@@ -81,6 +83,7 @@ router.get('/:id/show', function (req, res) {
 
 //DELETE
 //FUNCTIONALITY WILL BE UNAVAILABLE EXCEPT TO ADMINISTRATORS
+//************ARE YOU EVEN ALLOWED TO BE REVIEWING THIS CODE? ARE YOU? *********
 
 // EDIT -- form to edit an article
 router.get('/:id/edit', function(req, res) {
@@ -115,6 +118,5 @@ router.post('/:id/edit', function (req, res) {
     }
   });
 });
-
 
 module.exports = router;
