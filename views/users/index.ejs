@@ -2,6 +2,7 @@
   <h2>Current Users</h2>
   <ul id="users-list">
   <% users.forEach(function(user, i) { %>
-  <li><a href="/users/<%= user._id %>/show"><%= user.name %></a>, <%= user.title %>, <%= user.department %></li>
+  <li><span class="users-list-item"><a href="/users/<%= user._id %>/show" class="users-list-name"><%= user.name %></a></span>, <span class="users-list-item"><%= user.title %>,</span> <span class="users-list-item">
+  <%= user.department %></span></li>
   <% }); %>
 </div>

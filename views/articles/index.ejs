@@ -3,9 +3,9 @@
   <dl id="article-list">
   <% articles.forEach(function(article, i) { %>
   <dt class="article-list-title"><a href="/articles/<%= article._id %>/show"><%= article.title %></a></dt>
-  <dd class="article-list-item">
-    <span class="article-list-item-category">Category: <%= article.category %></span>
-    <span class="article-list-item-author">Author: <%= article.author.name %> on <%= article.editDates[0] %></span>.
+  <dd class="article-list-items">
+    <span class="article-list-item">Category: <%= article.category %></span>
+    <span class="article-list-item">Author: <%= article.author.name %> on <%= article.editDates[0] %></span>.
   </dd>
   <% }); %>
   </dl>

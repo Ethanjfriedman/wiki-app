@@ -7,8 +7,16 @@
 }
 
 body {
-  background: lightgray;
+  /*background: lightgray;*/
   height: 100vh;
+	background: -webkit-radial-gradient(center, circle, rgba(255,255,255,.35), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 21%), -webkit-radial-gradient(center, circle, rgba(0,0,0,.2), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, #c0c0c0);
+	background: -moz-radial-gradient(center, circle, rgba(255,255,255,.35), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 21%), -webkit-radial-gradient(center, circle, rgba(0,0,0,.2), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, #c0c0c0);
+	background: -ms-radial-gradient(center, circle, rgba(255,255,255,.35), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 21%), -webkit-radial-gradient(center, circle, rgba(0,0,0,.2), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, #c0c0c0);
+	background: -o-radial-gradient(center, circle, rgba(255,255,255,.35), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 21%), -webkit-radial-gradient(center, circle, rgba(0,0,0,.2), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, #c0c0c0);
+	background: radial-gradient(center, circle, rgba(255,255,255,.35), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 21%), -webkit-radial-gradient(center, circle, rgba(0,0,0,.2), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, #c0c0c0);
+	background-size: 10px 10px, 10px 10px, 100% 100%;
+	background-position: 1px 1px, 0px 0px, center center;
+	top: 0;
 }
 
 #header {
@@ -37,14 +45,8 @@ body {
   color: lightgray;
 }
 
-#corp-name .loaded {
-  font-size: 3em;
-  font-family: 'Francois One', sans-serif;
-  font-weight: bold;
-  font-style: italic;
-  padding-left: 2%;
-  font-size: 5em;
-  color: purple;
+#corp-name:hover {
+  color: red;
 }
 
 nav {
@@ -114,20 +116,37 @@ form {
   display: inline-flex;
   flex-direction: column;
 }
+
 p {
   margin-bottom: 0.5em;
   margin-left: 1em;
 }
 
-input {
+input, select {
   transition: all 0.4s ease;
+  margin-bottom: 1em;
 }
 
-input:focus {
+input:hover, select:hover {
+  background: lightgray;
+}
+
+input:focus, select:focus {
   background: #e5fff3;
 }
 
 input[type="textarea"] {
   width: 60vw;
   height: 40vh;
+  vertical-align: top;
+}
+
+footer {
+  padding-left: 2%;
+  font-size: 0.75em;
+}
+
+.article-list-item, .users-list-item {
+  position: relative;
+  margin-left: 0.5em;
 }
