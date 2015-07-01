@@ -67,7 +67,7 @@ server.post('/', function (req, res) {
             res.render('welcome', {user: user});
           } else {
             console.log("WRONG PASSWORD");
-            res.render('login');
+            res.redirect(301, '/');
           }
         });
       }
